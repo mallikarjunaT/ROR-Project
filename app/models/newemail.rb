@@ -1,0 +1,2 @@
+class Newemail < ApplicationRecord
+end

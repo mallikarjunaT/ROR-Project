@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Newemails</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Login</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @newemails.each do |newemail| %>
+      <tr>
+        <td><%= newemail.name %></td>
+        <td><%= newemail.email %></td>
+        <td><%= newemail.login %></td>
+        <td><%= link_to 'Show', newemail %></td>
+        <td><%= link_to 'Edit', edit_newemail_path(newemail) %></td>
+        <td><%= link_to 'Destroy', newemail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Newemail', new_newemail_path %>

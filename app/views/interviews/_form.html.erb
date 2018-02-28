@@ -1,0 +1,59 @@
+<%= form_for @interview, :html => { :class => "form-horizontal interview" } do |f| %>
+
+  <% if @interview.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@interview.errors.count, "error") %> prohibited this interview from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @interview.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.date_field :date, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:date) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :status, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:status) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :employee, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.collection_select(:employee_id, Newemployee.all, :id, :email, prompt: true)  %>
+    </div>
+    <%=f.error_span(:employee) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :student, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%=  f.collection_select(:student_id, Student.all, :id, :name, prompt: true, :class => 'form-control')  %>
+      <%#=f.select(:model, :attribute, Student.all.collect {|p| [ p.name, p.id ] })%>
+    </div>
+    <%=f.error_span(:student) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                interviews_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
+
+
+
